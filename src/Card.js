@@ -7,6 +7,7 @@ import WeatherIcon from "./WeatherIcon";
 import Temperature from "./Temperature";
 import WeatherDetails from "./WeatherDetails";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Card() {
   const [weather, setWeather] = useState("");
