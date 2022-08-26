@@ -1,15 +1,8 @@
 .App {
-  font-family: sans-serif;
-  text-align: center;
+    text-align: center;
 }
 
 body {
-  background-color: #d7e5f0;
-  color: #353535;
-  color: #353535;
-  font-family: "Roboto", sans-serif;
-}
+    font-family: 'Poppins', sans-serif;
 
-.WeatherInfo {
-  height: 80px;
 }
