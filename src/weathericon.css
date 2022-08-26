@@ -1,0 +1,6 @@
+.current-weather-icon {
+  height: 80px;
+  transform: scale(1.5);
+  overflow: hidden;
+  width: 20%;
+}
