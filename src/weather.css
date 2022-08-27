@@ -21,11 +21,10 @@
 }
 
 .forecast-weather-icon {
-  height: 50px;
+  height: 40px;
   margin-top: 5px;
   transform: scale(1.5);
   overflow: hidden;
-  width: 20%;
 }
 
 .forecast-day {
