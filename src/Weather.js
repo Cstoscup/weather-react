@@ -21,6 +21,14 @@ export default function Weather(props) {
     axios.get(apiUrl).then(handleResponse);
   }
 
+  function searchCoords(coordinates) {
+    let long = coordinates[1];
+    let lat = coordinates[0];
+    let apiKey = "9ed24e5c436afdb265857268e29a26c9";
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=imperial`;
+    axios.get(url).then(handleResponse);
+}
+
   function handleChange(event) {
     event.preventDefault();
     setCity(event.target.value)
@@ -34,6 +42,16 @@ export default function Weather(props) {
   function handleClickCityButton(event) {
     setCityButton(event.target.name) 
   }
+
+  function getLocation(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(getCoordinates)
+  }
+
+  function getCoordinates(position) {
+    let coordinates = [position.coords.latitude, position.coords.longitude];
+    searchCoords(coordinates)
+}
 
   useEffect(() => {
     searchButton();
@@ -56,7 +74,7 @@ export default function Weather(props) {
               value="Search"
               onClick={handleClick}
             />
-            <button className="btn btn-outline-secondary shadow-sm location-button">
+            <button className="btn btn-outline-secondary shadow-sm location-button" onClick={getLocation}>
               <i className="fa-solid fa-location-dot"></i>
             </button>
           </form>
@@ -65,10 +83,10 @@ export default function Weather(props) {
           <WeatherForecast data={weather}/>
           <hr />
           <div className="d-flex justify-content-around">
-            <button className="btn btn-secondary" name="Paris" onClick={handleClickCityButton}>Paris</button>
-            <button className="btn btn-secondary" name="Sydney" onClick={handleClickCityButton}>Sydney</button>
-            <button className="btn btn-secondary" name="Tokyo" onClick={handleClickCityButton}>Tokyo</button>
-            <button className="btn btn-secondary" name="New York" onClick={handleClickCityButton}>New York</button>
+            <button className="btn btn-secondary city-button" name="Paris" onClick={handleClickCityButton}>Paris</button>
+            <button className="btn btn-secondary city-button" name="Sydney" onClick={handleClickCityButton}>Sydney</button>
+            <button className="btn btn-secondary city-button" name="Tokyo" onClick={handleClickCityButton}>Tokyo</button>
+            <button className="btn btn-secondary city-button" name="New York" onClick={handleClickCityButton}>New York</button>
           </div>
         </div>
       </div>

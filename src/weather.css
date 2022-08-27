@@ -88,6 +88,11 @@
   padding: 0;
 }
 
+.Weather .city-button {
+  width: 25%;
+  margin: 0 5px;
+}
+
 .min-temp {
   opacity: .6;
 }
@@ -102,6 +107,9 @@
   .Weather .weather-details {
     font-size: 14px;
     margin-top: 18px;
+  }
+  .Weather .city-button {
+    font-size: 13px;
   }
 }
 

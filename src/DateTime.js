@@ -4,11 +4,16 @@ import axios from "axios";
 export default function DateTime(props) {
     const [day, setDay] = useState("");
     const [time, setTime] = useState("");
-    let long = props.response.lon;
-    let lat = props.response.lat;
-    let apiKey = "6aa24761b999470a92c6399feefd0f88";
-    let url = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${long}`;
-    axios.get(url).then(displayDate);
+    const [ready, setReady] = useState(false);
+    
+    function getDate() {
+        setReady(true);
+        let long = props.response.lon;
+        let lat = props.response.lat;
+        let apiKey = "6aa24761b999470a92c6399feefd0f88";
+        let url = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${long}`;
+        axios.get(url).then(displayDate);
+    }
 
     function displayDate(response) {
         let timeLong = response.data.time_12;
@@ -24,5 +29,11 @@ export default function DateTime(props) {
         setDay(dayComma.slice(0, -1));
     }
     
-    return <h5 className="date-time mt-2">{day} {time}</h5>
+    if (ready) {
+        return <h5 className="date-time mt-2">{day} {time}</h5>;
+    } else {
+        getDate();
+        return null;
+    }
+    
 }
