@@ -4,6 +4,7 @@ import "./weather.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import { RotatingLines } from 'react-loader-spinner'
 import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
   const [weather, setWeather] = useState({ready: false});
@@ -47,6 +48,7 @@ export default function Weather(props) {
           </form>
           <WeatherInfo data={weather}/>
           <hr />
+          <WeatherForecast data={weather}/>
         </div>
       </div>
     );
