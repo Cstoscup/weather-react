@@ -42,6 +42,10 @@
   top: -30px;
 }
 
+.Weather .temp-unit a {
+  text-decoration: none;
+}
+
 .Weather .search {
   display: flex;
   justify-content: space-between;

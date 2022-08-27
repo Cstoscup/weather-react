@@ -1,6 +1,7 @@
 import React from "react";
 import DateTime from "./DateTime";
-import "./weather.css"
+import "./weather.css";
+import WeatherTemperature from "./WeatherTemperature";
 
 export default function WeatherInfo(props) {
     return (
@@ -9,7 +10,7 @@ export default function WeatherInfo(props) {
             <DateTime response={props.data}/>
             <div className="d-flex mt-4">
                 <img src={`images/${props.data.icon}.svg`} alt={props.data.icon} className="current-weather-icon"/>
-                <h1 className="temp">{Math.round(props.data.temperature)}<span className="temp-unit">°F</span></h1>
+                <WeatherTemperature temp={props.data.temperature}/>
                 <div className="weather-details">
                     <span className="text-capitalize">{props.data.description}</span>
                     <br />
