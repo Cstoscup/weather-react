@@ -33,7 +33,6 @@ export default function DateTime(props) {
         return <h5 className="date-time mt-2">{day} {time}</h5>;
     } else {
         getDate();
-        return null;
     }
     
 }
