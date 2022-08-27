@@ -1,0 +1,28 @@
+import React, {useState} from "react";
+import axios from "axios";
+
+export default function DateTime(props) {
+    const [day, setDay] = useState("");
+    const [time, setTime] = useState("");
+    let long = props.response.lon;
+    let lat = props.response.lat;
+    let apiKey = "6aa24761b999470a92c6399feefd0f88";
+    let url = `https://api.ipgeolocation.io/timezone?apiKey=${apiKey}&lat=${lat}&long=${long}`;
+    axios.get(url).then(displayDate);
+
+    function displayDate(response) {
+        let timeLong = response.data.time_12;
+        let timeArray = timeLong.split("")
+        timeArray.splice(5, 3);
+        if (timeArray[0] === "0") {
+            timeArray.shift();
+        }
+
+        setTime(timeArray.join(""))
+        let date = response.data.date_time_txt;
+        let dayComma = date.split(" ")[0];
+        setDay(dayComma.slice(0, -1));
+    }
+    
+    return <h5 className="date-time mt-2">{day} {time}</h5>
+}
