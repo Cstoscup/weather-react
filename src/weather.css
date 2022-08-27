@@ -53,9 +53,9 @@
 }
 
 .Weather .temp-unit {
-  font-size: 16px;
+  font-size: 20px;
   position: relative;
-  top: -30px;
+  top: -29px;
 }
 
 .Weather .temp-unit a {
