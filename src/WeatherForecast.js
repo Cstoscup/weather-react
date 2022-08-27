@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./weather.css"
 import axios from "axios";
 import WeatherForecastDay from "./WeatherForecastDay"
+import { RotatingLines } from 'react-loader-spinner'
 
 export default function WeatherForecast(props) {
     const [ready, setReady] = useState(false)
@@ -14,6 +15,14 @@ export default function WeatherForecast(props) {
     function displayForecast(response) {
         setForecast(response.data.daily);
         setReady(true);
+    }
+
+    function load() {
+        let long = props.data.lon;
+        let lat = props.data.lat;
+        let apiKey = "9ed24e5c436afdb265857268e29a26c9";
+        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${apiKey}&units=imperial`;
+        axios.get(url).then(displayForecast)
     }
 
     if (ready) {
@@ -33,12 +42,14 @@ export default function WeatherForecast(props) {
             </div>
         )
     } else {
-        let long = props.data.lon;
-        let lat = props.data.lat;
-        let apiKey = "9ed24e5c436afdb265857268e29a26c9";
-        let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${apiKey}&units=imperial`;
-        axios.get(url).then(displayForecast)
+        load();
 
-        return "Loading...";
+        return (<RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="48"
+            visible={true}
+          />)
     }
 }

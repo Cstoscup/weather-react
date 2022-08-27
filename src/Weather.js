@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import "./weather.css";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -8,10 +8,16 @@ import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
   const [weather, setWeather] = useState({ready: false});
-  const [city, setCity] = useState(props.defaultCity)
+  const [city, setCity] = useState(props.defaultCity);
+  const [cityButton, setCityButton] = useState("");
 
   function search() {
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=9ed24e5c436afdb265857268e29a26c9&units=imperial`
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function searchButton() {
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityButton}&appid=9ed24e5c436afdb265857268e29a26c9&units=imperial`
     axios.get(apiUrl).then(handleResponse);
   }
 
@@ -24,6 +30,14 @@ export default function Weather(props) {
     event.preventDefault();
     search();
   }
+
+  function handleClickCityButton(event) {
+    setCityButton(event.target.name) 
+  }
+
+  useEffect(() => {
+    searchButton();
+}, [cityButton]);
 
   if (weather.ready) {
     return (
@@ -49,6 +63,13 @@ export default function Weather(props) {
           <WeatherInfo data={weather}/>
           <hr />
           <WeatherForecast data={weather}/>
+          <hr />
+          <div className="d-flex justify-content-around">
+            <button className="btn btn-secondary" name="Paris" onClick={handleClickCityButton}>Paris</button>
+            <button className="btn btn-secondary" name="Sydney" onClick={handleClickCityButton}>Sydney</button>
+            <button className="btn btn-secondary" name="Tokyo" onClick={handleClickCityButton}>Tokyo</button>
+            <button className="btn btn-secondary" name="New York" onClick={handleClickCityButton}>New York</button>
+          </div>
         </div>
       </div>
     );
