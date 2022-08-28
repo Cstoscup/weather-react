@@ -9,7 +9,7 @@ import WeatherForecast from "./WeatherForecast";
 export default function Weather(props) {
   const [weather, setWeather] = useState({ready: false});
   const [city, setCity] = useState(props.defaultCity);
-  const [cityButton, setCityButton] = useState("");
+  const [cityButton, setCityButton] = useState("New York");
 
   function search() {
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=9ed24e5c436afdb265857268e29a26c9&units=imperial`
