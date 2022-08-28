@@ -16,11 +16,6 @@ export default function Weather(props) {
     axios.get(apiUrl).then(handleResponse);
   }
 
-  function searchButton() {
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityButton}&appid=9ed24e5c436afdb265857268e29a26c9&units=imperial`
-    axios.get(apiUrl).then(handleResponse);
-  }
-
   function searchCoords(coordinates) {
     let long = coordinates[1];
     let lat = coordinates[0];
@@ -54,7 +49,8 @@ export default function Weather(props) {
 }
 
   useEffect(() => {
-    searchButton();
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityButton}&appid=9ed24e5c436afdb265857268e29a26c9&units=imperial`
+    axios.get(apiUrl).then(handleResponse);
 }, [cityButton]);
 
   if (weather.ready) {

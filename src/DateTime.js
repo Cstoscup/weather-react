@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 
 export default function DateTime(props) {
@@ -6,6 +6,10 @@ export default function DateTime(props) {
     const [time, setTime] = useState("");
     const [ready, setReady] = useState(false);
     
+    useEffect(() => {
+        setReady(false)
+    }, [props]);
+
     function getDate() {
         setReady(true);
         let long = props.response.lon;
